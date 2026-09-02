@@ -80,6 +80,12 @@ linked to their styling. A post from generic paragraph/heading blocks is
 off-template and must not ship.
 
 Hard rules:
+- **Full length, never a stub.** A real TTK post runs ~1,000–1,400 words
+  (corpus average ~1,277). Every skeleton section carries real, specific
+  prose — the info box has 4–5 benefit bullets, ingredients each get a
+  descriptive line, instructions are written out, substitutions/variations/
+  storage are genuine paragraphs, the FAQ has 4–5 real Q&As. A thin draft
+  that only fills the headings is not shippable; write it out.
 - **Quantities are sourced, never invented.** From an existing recipe card,
   from Alison, or marked `[CONFIRM]` — a plausible-looking made-up tablespoon
   is worse than a visible gap.
