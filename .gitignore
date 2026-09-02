@@ -1,0 +1,9 @@
+# Working output is per-shoot and includes client content — never publish it
+data/
+**/data/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/
