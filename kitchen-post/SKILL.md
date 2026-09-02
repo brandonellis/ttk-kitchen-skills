@@ -66,13 +66,18 @@ angle: what does this shoot show that the published post doesn't own as a
 keyword? Name the angle and its target query in the draft header, and make
 the existing post the first internal link.
 
-Structure mirrors the site's published recipe posts (verify against the
-voice study, don't assume): intro that earns the scroll (adapted from the
-shoot's lead hook), affiliate disclosure placeholder, "Why You and Your
-Child Will Love…" with the RD angle, ingredients + toddler-friendly topping
-ideas with nutrition notes, instructions overview + a practical hint,
-substitutions, variations with internal links, equipment, storage, a Toddler
-Tip, FAQ (4–5 real questions), and the WPRM recipe card fields.
+Structure follows the **Feast recipe-post template** exactly — not free-form
+prose. Emit the full block skeleton in `references/post-template.md`: intro,
+hero image, affiliate disclosure, the Feast jump-to-recipe block, the
+`toddlerkitchen/dietitian-approved` "Why You'll Love" info-box pattern,
+ingredients (with topping subgroups + "See recipe card for quantities."),
+instructions as `wp:columns` step rows (image + text), substitutions
+(`feast-feature` list), variations with internal links, equipment, storage,
+the `toddlerkitchen/dietitian-tip` "Toddler Tip" pattern, FAQ as a
+`wp:yoast/faq-block`, the WPRM recipe block, related, and the Feast recipe
+index. Keep the custom patterns' `patternName`/`className` intact so they stay
+linked to their styling. A post from generic paragraph/heading blocks is
+off-template and must not ship.
 
 Hard rules:
 - **Quantities are sourced, never invented.** From an existing recipe card,
