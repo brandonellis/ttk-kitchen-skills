@@ -23,6 +23,7 @@ artifact. This router just gets you to the right piece with less typing.
 | `update <creation> [hooks·post]` (or `revise`, `redo`) | update mode below | Rework ONE piece of a kit that already ran, same artifact URL. Not the WordPress update package — that stays `/kitchen post update <slug>`. |
 | `analyze` · `refresh` | `kitchen-hooks` | Account-analysis modes pass straight through. |
 | `study <@account …>` | `kitchen-hooks` | Inspiration study of accounts we like → swipe file. |
+| `trends [ingredient/topic …]` | `kitchen-hooks` | What to make next: own top topics + peer signal + free external demand (Google/Pinterest Trends, seasonality). |
 | `help` or *(nothing)* | this table | Print it with one-line examples and stop. Unknown first arg: print it and ask — never guess a route. |
 
 Route by invoking the target skill via the Skill tool with the remaining

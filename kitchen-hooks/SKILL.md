@@ -37,6 +37,7 @@ Read-only on Instagram, always: never like, comment, follow, DM, or post.
 | `shoot <path or dish>` | tailored hooks | The main working mode once analysis exists: hooks for a specific piece of freshly shot content. See "Shoot mode". |
 | `analyze` | analysis only | Scrape + classify + pattern report, no hook bank. |
 | `study <@account …>` | inspiration study | Learn from accounts we like: pull their recent reels via the acquisition ladder in `references/instagram-data.md`, rank against that account's own median, transcribe the top hooks, extract mechanisms into the swipe file. See "Study mode". |
+| `trends [ingredient/topic …]` | trend read | What to make next: cross-reference the account's own top-quartile topics, peer signal, and free external demand (Google Trends, Pinterest Trends, seasonality). See "Trends mode". |
 | `refresh` | drift report | Re-pull public numbers, diff against the last snapshot. See "Refresh is a drift report". |
 | `help` | show the modes | Print this table with one-line examples and stop. Also the right response to any argument matching no mode: show the table and ask, never guess. |
 
@@ -85,16 +86,24 @@ a blank to fill.
    written down anywhere? Skip the round entirely if the user already provided
    these; never block on it.
 4. **Snapshot everything** to `data/snapshot-YYYY-MM-DD.json` (date from
-   `date +%F`): one record per reel with url, date, play count, likes,
-   comments, caption first line, hook description, and grade of each field.
-   Snapshots are what make `refresh` and longitudinal learning possible.
+   `date +%F`): one record per reel with url, date, the metrics (play count,
+   likes, comments, and — with the API token — saves, shares, reach,
+   follows, watch time), caption first line, hook description, and the
+   grade of each field. Also tag each record `{topic, primary_ingredients,
+   format, hook_pattern, season}` so trends can be sliced by one field at a
+   time (see `references/performance-and-trends.md`). Snapshots are what make
+   `refresh`, trend analysis, and longitudinal learning possible.
 
 ## Phase 2 — analyze (the account is its own baseline)
 
+- **Rank by the right metric, not by likes.** Load
+  `references/performance-and-trends.md` first. With the API token, rank on
+  shares + saves + follows (the growth signals); without it, rank on the best
+  public proxy available (usually plays, then likes) and say so. Likes are
+  never the target.
 - **Classify against the account's own median, never against other accounts.**
-  Compute median plays across the snapshot; top quartile = winners, bottom
-  quartile = laggards. Recency-adjust: a 3-day-old reel with median plays is
-  outperforming, not average.
+  Top quartile = winners, bottom quartile = laggards on the chosen metric.
+  Recency-adjust: a 3-day-old reel at median is outperforming, not average.
 - **Transcribe the hook of every winner and laggard**: spoken first line,
   on-screen text, first visual, caption first line. The hook is all four
   together.
@@ -191,6 +200,29 @@ Hard rules for using what we find:
   tension, kinder direction, through the writing floor like everything else.
 - Numbers from other accounts grade as Public (API or scraped, per the
   ladder); why-it-works claims stay Inferred.
+
+## Trends mode — what to make next
+
+Answers "which ingredients/topics are worth content." Follow
+`references/performance-and-trends.md`; produce a ranked shortlist, not a
+data dump.
+
+1. **Own signal first** (most reliable): from the latest snapshot, which
+   `topic`/`primary_ingredients` tags keep landing in the top quartile on
+   saves + shares (or the best available proxy)? That is *your* audience
+   speaking, and it outranks any external source.
+2. **Peer signal**: what those topics look like on the study accounts.
+3. **External demand (free, no token)**: Google Trends and Pinterest Trends
+   for seasonality and rising queries; fetch via `/browse` or WebSearch.
+   Layer the seasonality calendar (back-to-school, summer, fall).
+4. **Decide**: an ingredient/topic earns a slot when rungs agree — own top
+   quartile AND peer traction AND rising/seasonal demand. One rung is a
+   hypothesis; three aligned is a plan. Pair each pick with a proven hook
+   pattern from the account's own history.
+
+Output: a short ranked list of topics/ingredients to shoot next, each with
+which rungs backed it and its provenance grade. Say the n and the confounds
+out loud (small-account caveat). Write it to `data/trends-YYYY-MM-DD.md`.
 
 ## Refresh is a drift report
 

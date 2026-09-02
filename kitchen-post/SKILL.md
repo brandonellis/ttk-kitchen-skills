@@ -78,6 +78,14 @@ Hard rules:
 - **Quantities are sourced, never invented.** From an existing recipe card,
   from Alison, or marked `[CONFIRM]` — a plausible-looking made-up tablespoon
   is worse than a visible gap.
+- **A recipe post ships a real recipe card, not just prose.** When the draft
+  is an actual recipe (not a roundup or ingredient explainer), emit a
+  **structured recipe block** matching WP Recipe Maker's shape (name, summary,
+  type, servings, times, grouped ingredients with amount/unit/name/notes,
+  grouped instructions, notes, course/keyword) plus the ready-to-run
+  `recipe-create.php`, so the post becomes a proper WPRM card like the live
+  ones. Full schema and the create/connect paths:
+  `references/recipe-structure.md`.
 - **Internal links follow the site IA**: Recipes are single dishes; Meal
   Ideas are roundups. Link 2–3 genuinely related posts found via wp-cli
   search, not guessed URLs.

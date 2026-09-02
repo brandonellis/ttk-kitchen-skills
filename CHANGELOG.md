@@ -2,6 +2,20 @@
 
 All notable changes to the TTK Kitchen Skills suite.
 
+## [Unreleased]
+
+### Added
+- **Performance & trends** (`performance-and-trends.md`) — the metric hierarchy
+  (shares/saves/follows/watch-time over likes), attribution method, and a
+  ranked trend-source list (own account, peers, Google/Pinterest Trends,
+  seasonality). New `trends` mode; `analyze` now ranks on growth metrics and
+  tags each post by topic/ingredient/format.
+- **Recipe structure** (`recipe-structure.md`) — WP Recipe Maker schema
+  (grounded in the live site), the reliable create path via
+  `WPRM_Recipe_Saver::create_recipe`, and API connection via WP-CLI/SSH or
+  Application Passwords. `kitchen-post` now emits a structured WPRM recipe
+  block so recipe drafts ship as real cards.
+
 ## [0.1.0] - 2026-09-02
 
 First published version. Built over two sessions from a single request
