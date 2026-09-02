@@ -63,25 +63,44 @@ Then link it to the blog post and embed the card. WPRM renders via the recipe
 block; the classic shortcode `[wprm-recipe id="ID"]` also works in post content.
 Set `wprm_parent_post_id` to the blog post id so the card claims its parent.
 
-## Connecting to the API (prod: www.thetoddlerkitchen.com)
+## Connecting to the API (prod: www.thetoddlerkitchen.com) — CONFIRMED WORKING
 
-Two supported ways; pick by access:
+Auth is a WordPress **Application Password** over HTTPS Basic auth. Verified
+2026-09-02. Credentials live outside the repo:
 
-1. **WP-CLI over SSH (preferred, most reliable).** BigScoots gives shell
-   access. Copy `recipe-create.php` up and `wp eval-file` it, exactly as
-   local. Same saver, same result, no REST surface to fight.
-2. **WP REST API + Application Password (no shell).** In WordPress, the
-   author account → Users → Profile → **Application Passwords** → add one
-   (e.g. "kitchen-post"). Authenticate REST calls with HTTP Basic
-   (`user:app-password`). WPRM Premium exposes recipe endpoints under
-   `/wp-json/wp-recipe-maker/v1/`; the WP core CPT lives at
-   `/wp-json/wp/v2/wprm_recipe`. Store the app password OUTSIDE the repo
-   (e.g. `~/.config/ttk/wp-app-password`), like the IG token. It is scoped to
-   that user and revocable from the same screen.
+- `~/.config/ttk/wp-user` = `alisonjquinlan` (admin, Ali Ellis)
+- `~/.config/ttk/wp-app-password` (24-char app password, chmod 600)
+- `~/.config/ttk/wp-url` = `https://www.thetoddlerkitchen.com`
 
-**Guardrail (unchanged):** the skill never writes to prod unasked. Local WP is
-a mirror for building and previewing; a recipe created there still has to be
-recreated on prod by an explicit action Brandon takes.
+Use them: `PASS=$(tr -d ' ' < ~/.config/ttk/wp-app-password)` then
+`curl -u "$(cat ~/.config/ttk/wp-user):$PASS" ...`. (Strip the display spaces
+from the password.) The earlier 401 was a wrong username, not header stripping
+— BigScoots passes the Authorization header fine.
+
+**The canonical create path (remote, no SSH):**
+`POST /wp-json/wp-recipe-maker/v1/manage/recipe` — the same endpoint WPRM's
+editor posts to on Save, so it runs full normalization. Update an existing
+recipe with `POST /wp-recipe-maker/v1/manage/recipe/{id}`. Helpers:
+`/wp-recipe-maker/v1/modal/ingredient/parse` (turn "½ cup milk" into
+amount/unit/name) and `/wp-recipe-maker/v1/nutrition/calculated` (auto
+nutrition). Read recipes via the core CPT `/wp-json/wp/v2/wprm_recipe`.
+
+Alternative (with shell): WP-CLI `wp eval-file recipe-create.php` calling
+`WPRM_Recipe_Saver::create_recipe` — same result, useful for bulk/local.
+
+**Security note (load-bearing).** This app password authenticates as an
+**administrator** (user 1) with `manage_options` — it can change anything on
+the site over REST, so treat it like a root key: it stays out of the repo and
+out of any artifact, and every prod write is gated on an explicit Brandon
+request. Consider a dedicated Editor-role account for this later (least
+privilege); not required to work. Revoke anytime from Users → Profile →
+Application Passwords.
+
+**Dev-safe workflow (the guardrail, unchanged):** build and verify every
+recipe on LOCAL first (POST to `http://localhost:8000/wp-json/...` or
+`wp eval-file`), render the card, confirm it matches. Only replicate to prod
+with the app password on an explicit instruction. The exact `/manage/recipe`
+payload shape is confirmed against local before it is ever sent to prod.
 
 ## What kitchen-post emits
 
