@@ -154,10 +154,25 @@ Local WP is a prod mirror; treat IDs/slugs as real.
 
 ## Verify, record, hand back
 
-One batched round: writing-floor greps on the draft, a voice pass against
-the studied posts (spellings, register), a provenance check that every
-quantity and nutrition claim is sourced or marked `[CONFIRM]`. Fix once,
-re-check once, stop.
+One batched round against this **pre-ship checklist** — a draft that fails any
+item is not shippable:
+
+- **Voice gates pass**: writing-floor greps (food negativity, shaming,
+  clinical overreach, hype) all return 0.
+- **Voice pass**: Canadian spellings, spaced-hyphen dash, no emoji, the
+  "As a dietitian and mom" register (see `ttk-voice.md`).
+- **Full length**: ≥1,000 words, every template section carrying real prose,
+  not a heading-only stub.
+- **Template complete** (recipe posts): all the blocks present — Feast
+  jump, the `dietitian-approved` info box, ingredients, `wp:columns` steps,
+  `feast-feature` substitutions, the `dietitian-tip` box, the Yoast FAQ, the
+  WPRM recipe block, the Feast index.
+- **Recipe card**: present, and every quantity sourced; `[CONFIRM]` count is
+  0, or each remaining one is surfaced to the user by name.
+- **Internal links**: 2–3, each a real slug found via search, never guessed.
+- **No spacing artifacts**: no empty paragraphs, stray `&nbsp;`, or `<br>`.
+
+Fix once, re-check once, stop.
 
 Output lands in `data/` here (`draft-<slug>-<date>.md` or
 `update-<slug>-<date>.md`, date from `date +%F`). Hand back: what was

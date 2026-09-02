@@ -76,9 +76,13 @@ a blank to fill.
    for likes, comments, caption first line, and a description of the first
    1–3 seconds (the visual hook). Confirm on first run that this handle is
    Alison's account before analyzing anything.
-   - Login wall or heavy throttling? Suggest `/setup-browser-cookies` once;
-     if still blocked, fall back to user-provided data and say so in the
-     report. Never retry aggressively.
+   - **User-provided Insights are a first-class input, not a last resort.**
+     Screenshots or exports of the account's own Insights (reach, saves,
+     shares, follows, watch time) are the fastest route to Measured and are
+     often the ONLY working path — the Graph token may not be set up and the
+     public grid is frequently login-walled. Offer this up front. If scraping
+     is the only option and it hits a wall, suggest `/setup-browser-cookies`
+     once, then ask for screenshots. Never retry aggressively.
 3. **One round of questions** (AskUserQuestion), only for real gaps — the
    standing ones: can the user export or screenshot Instagram Insights for the
    top/bottom ~5 reels (upgrades the whole analysis to Measured), and is there
@@ -178,7 +182,8 @@ camera. The first second of a reel must agree with its first frame.
 Other accounts are pattern mines, never source material. For each named
 account (data via the acquisition ladder in `references/instagram-data.md`:
 Graph API Business Discovery when the token exists, `/browse` scraping as
-the restrained fallback, user-shared links/screenshots always welcome):
+the restrained fallback, and **user-shared links/screenshots — often the only
+working path today, so ask for them up front**):
 
 1. Rank their recent ~30 posts against THAT account's own median (likes +
    comments when view counts aren't available). Pick the top ~6 and two
