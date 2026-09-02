@@ -40,14 +40,20 @@ in a post.
 1. **Shoot context**: the named shoot file, or the latest in
    `../kitchen-hooks/data/`. Note the media paths, the hook sheet, and any
    artifact URL recorded there.
-2. **Duplicate check is mandatory.** `df -h /` first (a full disk wedges
-   Docker exec — see project memory). Then query the local WP:
-   `docker exec thetoddlerkitchen-wordpress-1 sh -c "php -d memory_limit=1024M
-   /usr/local/bin/wp --allow-root --skip-plugins --skip-themes post list
-   --post_type=post --s='<dish>' ..."` — the memory-limit and skip flags are
-   required (Yoast fatals silently without them). Search `post` AND
-   `wprm_recipe` types. If the stack is down, say so and confirm with the
-   user before assuming no post exists.
+2. **Duplicate check is mandatory.** Two paths depending on the machine:
+   - **Local WordPress present** (Docker mirror): `df -h /` first (a full disk
+     wedges Docker exec — see project memory), then
+     `docker exec thetoddlerkitchen-wordpress-1 sh -c "php -d memory_limit=1024M
+     /usr/local/bin/wp --allow-root --skip-plugins --skip-themes post list
+     --post_type=post --s='<dish>' ..."` (memory-limit + skip flags required —
+     Yoast fatals silently without them).
+   - **No local WordPress** (the standard case on other machines): use the
+     **live site REST API** with the app password in `~/.config/ttk/`:
+     `curl -u "$(cat ~/.config/ttk/wp-user):$(tr -d ' ' < ~/.config/ttk/wp-app-password)"
+     "$(cat ~/.config/ttk/wp-url)/wp-json/wp/v2/posts?search=<dish>&_fields=id,slug,title,link"`.
+     Same check, live source. Search `posts` AND `wprm_recipe` types.
+   Either way, if neither is reachable, say so and confirm with the user
+   before assuming no post exists.
 3. **Voice study**: load `../kitchen-hooks/references/ttk-voice.md` — the
    measured voice profile derived from the full published corpus (spellings,
    dash style, vocabulary, openers, the post skeleton). The per-run study is
@@ -151,14 +157,22 @@ the artifact URL; always republish to that same URL, never a sibling.
   `publish` only because localhost is a private mirror for previewing; prod is
   always draft.)
 
-## WordPress is optional research, never a dependency
+## WordPress access: local mirror OR live REST API
 
-When the local stack is up, use it read-only: voice study, the duplicate
-check, real slugs for internal links, recipe-card quantities. When it isn't
-(no Docker, another machine), degrade gracefully: voice-study from published
-post copies in `data/voice/` if present, or the live site via `/browse`;
-say plainly which checks were skipped and what that lowers confidence on.
-Local WP is a prod mirror; treat IDs/slugs as real.
+The skill needs to read (and, on request, write) WordPress. Two ways in:
+
+- **Local Docker mirror** (this machine): read-only via wp-cli for voice study,
+  the duplicate check, internal-link slugs, recipe quantities.
+- **Live site REST API** (any machine, esp. no-Docker): the **WordPress
+  Application Password** in `~/.config/ttk/{wp-url,wp-user,wp-app-password}`
+  does everything the mirror did — read existing posts/recipes, and (on
+  explicit request) create recipes via `/wp-recipe-maker/v1/manage/recipe` and
+  DRAFT posts. This is the primary path when there's no local WordPress. Full
+  setup + endpoints in `references/recipe-structure.md`.
+
+Neither reachable? Degrade gracefully: voice-study from the exemplar copies in
+`data/voice/`, note which checks were skipped and what that lowers confidence
+on. Never invent a slug or quantity to fill a gap.
 
 ## Verify, record, hand back
 

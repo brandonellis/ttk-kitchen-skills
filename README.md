@@ -65,6 +65,36 @@ reference each other by relative path, so keep them siblings. `kitchen-post`
 and the analysis modes look for a local WordPress mirror when one is available
 and degrade gracefully when it isn't.
 
+## API access (setup on a new machine)
+
+Credentials live **outside this repo** in `~/.config/ttk/` (never committed).
+Clone the skills, then set up what you need:
+
+**WordPress Application Password — required for the post/recipe pipeline.**
+The only access that matters when there's no local WordPress. It runs the live
+REST API: kitchen-post uses it to read existing posts (duplicate check,
+quantities, internal links, voice study) and to create recipes + **draft**
+posts on the live site. Create it in WP admin → Users → Profile → Application
+Passwords, then store (chmod 600):
+- `~/.config/ttk/wp-url` — e.g. `https://www.thetoddlerkitchen.com`
+- `~/.config/ttk/wp-user` — the WordPress username it belongs to
+- `~/.config/ttk/wp-app-password` — the 24-character password
+
+Prod posts are always created as **drafts**; a human publishes.
+
+**Instagram Graph API token — optional.** Only for *Measured* hook analysis
+(reach / saves / shares / watch time). The suite works without it, via
+user-provided Insights screenshots or a `/browse` read of the public grid.
+Setup and endpoints in `kitchen-hooks/references/instagram-data.md`
+(`~/.config/ttk/ig-token`, `ig-user-id`, `app-id`, `app-secret`).
+
+**gstack `/browse` — optional.** Needed for competitor study, public-grid
+reads, and Google/Pinterest Trends. A separate install; without it those modes
+fall back to user-provided data.
+
+**No key needed:** Google/Pinterest Trends (via `/browse` or web search) and
+artifact publishing (built into Claude Code).
+
 ## Keeping this repo current
 
 The canonical copies live in the project's `.claude/skills/`. To publish
