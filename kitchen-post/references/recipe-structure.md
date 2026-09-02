@@ -147,3 +147,12 @@ anything is pushed. The card layout in the artifact mirrors WP Recipe Maker so
 what you approve is what the site will render. Only after review, and only on an
 explicit request, does the same structured object go to prod via
 `POST /wp-recipe-maker/v1/manage/recipe`.
+
+**The artifact shows the REAL post, in full (WYSIWYG, one source of truth).**
+The blog content rendered in the artifact is the complete publishable post —
+the same words, full length (~1,000–1,400 words), every template section, with
+the recipe card embedded in its proper place (after the FAQ, before Related).
+It is the review surface for the actual post, never an excerpt, summary, or
+marketing-trimmed variant. The draft data file's block markup and the
+artifact's rendered prose are the same content; if they diverge, fix it. What
+Alison approves in the artifact is exactly what publishes.
