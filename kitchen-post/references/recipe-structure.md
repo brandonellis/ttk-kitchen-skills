@@ -59,9 +59,28 @@ $id = WPRM_Recipe_Saver::create_recipe( $recipe );
 echo "created wprm_recipe $id\n";
 ```
 
-Then link it to the blog post and embed the card. WPRM renders via the recipe
-block; the classic shortcode `[wprm-recipe id="ID"]` also works in post content.
-Set `wprm_parent_post_id` to the blog post id so the card claims its parent.
+Then link it to the blog post and embed the card. Set `wprm_parent_post_id` to
+the blog post id so the card claims its parent.
+
+## The post must mirror the site's block structure (verified on post 7303)
+
+The recipe *card* always looks right (global "modern" WPRM template). The
+*post* only matches the site's other recipe posts if it uses the same blocks.
+A real TTK recipe post is built from:
+
+- `wp:wp-recipe-maker/recipe {"id":ID}` — the recipe embedded as a **Gutenberg
+  block**, NOT the `[wprm-recipe]` shortcode. Use the block.
+- `wp:feast/advanced-jump-to-block` — the "Jump to Recipe" button, near the top.
+- `wp:feast/fsri-block` — Feast's recipe-index element.
+- `wp:yoast/faq-block` — FAQs use the **Yoast FAQ block** (gives schema +
+  the site's FAQ styling), not plain `wp:heading`/`wp:paragraph`.
+- Standard `wp:paragraph`, `wp:heading`, `wp:list`, `wp:image` for the prose.
+
+A post built from generic paragraph/heading blocks renders as valid Gutenberg
+but is NOT identical to the template: it loses the jump button, the Feast
+index element, and the FAQ schema. Generated recipe-post drafts must emit the
+four blocks above to match. Non-recipe posts (ingredient explainers, roundups)
+skip the recipe block but keep the Feast/Yoast blocks where the site uses them.
 
 ## Connecting to the API (prod: www.thetoddlerkitchen.com) — CONFIRMED WORKING
 

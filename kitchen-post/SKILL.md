@@ -86,6 +86,12 @@ Hard rules:
   `recipe-create.php`, so the post becomes a proper WPRM card like the live
   ones. Full schema and the create/connect paths:
   `references/recipe-structure.md`.
+- **Match the site's block structure so the post looks identical, not just
+  valid.** Real TTK recipe posts embed the recipe as the `wp:wp-recipe-maker/
+  recipe` Gutenberg block (not a shortcode) and use `wp:feast/
+  advanced-jump-to-block`, `wp:feast/fsri-block`, and `wp:yoast/faq-block`.
+  Emit those, or the post renders valid but off-template (no jump button, no
+  FAQ schema). Details in `references/recipe-structure.md`.
 - **Internal links follow the site IA**: Recipes are single dishes; Meal
   Ideas are roundups. Link 2–3 genuinely related posts found via wp-cli
   search, not guessed URLs.
