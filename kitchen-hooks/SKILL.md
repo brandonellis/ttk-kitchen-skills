@@ -1,7 +1,7 @@
 ---
 name: kitchen-hooks
 description: Analyze @thetoddlerkitchen's Instagram reels to learn which hooks perform for THIS account, then write food-positive hooks for new content. Use when the user asks for Instagram hooks, reel hooks, captions, cover text, "why did this reel do well/poorly", wants hooks for freshly shot food photos/video, or wants to study another account's content for inspiration ("look at this account", "why do their reels work"). Never negative about food — Alison is a registered dietitian.
-argument-hint: "[shoot <media-path-or-dish> · analyze · refresh · help] — no args runs analyze then builds the hook bank"
+argument-hint: "[shoot <media-path-or-dish> · analyze · study <@acct> · trends · refresh · help] — no args runs analyze then builds the hook bank"
 disable-model-invocation: false
 ---
 

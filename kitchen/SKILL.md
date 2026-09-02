@@ -1,7 +1,7 @@
 ---
 name: kitchen
 description: Router for The Toddler Kitchen content suite. Use when the user types /kitchen, asks for the "full package" for a shoot, wants to be walked through creating content from photos ("guide me", "walk me through"), or points at a folder of photos to turn into content. Dispatches to kitchen-hooks (Instagram reels) and kitchen-post (blog posts), runs both as one pipeline, or guides the user through it checkpoint by checkpoint — one creation-kit artifact either way. The sub-skills remain directly invocable.
-argument-hint: "[instagram <args> · post <args> · full <media-or-dish> · analyze · refresh · help]"
+argument-hint: "[full <media> · guide · update <creation> [hooks|post] · instagram <args> · post <args> · analyze · refresh · study <@acct> · trends · help]"
 disable-model-invocation: false
 ---
 
