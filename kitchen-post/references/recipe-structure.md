@@ -104,7 +104,17 @@ payload shape is confirmed against local before it is ever sent to prod.
 
 ## What kitchen-post emits
 
-Every recipe draft now carries a **structured recipe block** (the array above,
-as JSON in the draft's data file) alongside the prose, plus the ready-to-run
-`recipe-create.php`. Quantities follow the same sourcing rule as the prose:
-from Alison or an existing card, or marked `[CONFIRM]` — never invented.
+Every recipe draft carries a **structured recipe block** (the array above, as
+JSON in the draft's data file, e.g. `data/recipe-<slug>.json`) alongside the
+prose. Quantities follow the same sourcing rule as the prose: from Alison, an
+existing card, or the live card read via the API, or marked `[CONFIRM]` — never
+invented.
+
+**Artifact-first (standing pattern).** The recipe renders into the creation-kit
+artifact as a **WPRM-styled recipe card** (header with prep/cook/total/servings/
+course, equipment, the ingredient table with amount/unit/name/notes, numbered
+steps), in TTK branding, so the whole team reviews the exact structure before
+anything is pushed. The card layout in the artifact mirrors WP Recipe Maker so
+what you approve is what the site will render. Only after review, and only on an
+explicit request, does the same structured object go to prod via
+`POST /wp-recipe-maker/v1/manage/recipe`.
