@@ -23,6 +23,16 @@ A `wprm_recipe` post stores structured data in meta. The load-bearing fields:
 Ingredient/unit names resolve to WPRM's internal taxonomy tables on save, so
 they must be created through WPRM's saver, never by writing meta directly.
 
+## Verified end-to-end (2026-09-02)
+
+Proven on the local mirror: `WPRM_Recipe_Saver::create_recipe` + a post built
+from the block set below rendered **pixel-identical to a native recipe post** —
+Jump to Recipe + Print buttons, Feast Table of Contents, the full "modern" WPRM
+card (times, servings, equipment, ingredients with notes, numbered steps), and
+the sidebar/opt-ins. No design problems: the card's look is the global template,
+independent of how it was created. (Benign `Undefined array key "id"` notices
+appear during saver creation; ingredients/steps still render correctly.)
+
 ## The reliable create path — WPRM's own saver
 
 `WPRM_Recipe_Saver::create_recipe($recipe)` (confirmed present) takes a clean
