@@ -33,6 +33,15 @@ the sidebar/opt-ins. No design problems: the card's look is the global template,
 independent of how it was created. (Benign `Undefined array key "id"` notices
 appear during saver creation; ingredients/steps still render correctly.)
 
+**No added spacing (verified).** The generated `post_content` had zero empty
+paragraphs, zero `&nbsp;`, zero `<br>`, zero empty blocks — actually cleaner
+than a hand-authored post (which carried 19 `<p class="">` and a stray `&nbsp;`
+from the block editor). Block-to-block spacing comes from the theme/WPRM CSS on
+the block *types*, which are identical, so the vertical rhythm matches. Blank
+lines between blocks in the markup are stripped on parse and never render as
+gaps. If a future generated post shows an unexpected gap, it's a real empty
+block to remove, not an artifact of this method.
+
 ## The reliable create path — WPRM's own saver
 
 `WPRM_Recipe_Saver::create_recipe($recipe)` (confirmed present) takes a clean
