@@ -277,6 +277,17 @@ The Toddler Kitchen brand, never a borrowed look:
   post section to the SAME artifact — one page per creation that fleshes
   out Alison's idea end to end. Record the URL in the shoot's data file and
   always republish to it, never a sibling.
+- **When performance data exists, put the evidence IN the artifact** (standing
+  decision, Brandon 2026-09-02). Any real data we hold — an `analyze` run on
+  our own account, or a `study`/inspiration read of peers — gets a compact
+  **evidence panel** in the creation kit: the ranked patterns that back the
+  hooks, each with its provenance grade and the number behind it (e.g.
+  "finished-food-in-hand covers, up to 513K on peers · Public"), plus which
+  hook draws on which pattern. The hook chips then reflect it: `Inferred`
+  flips to `Public`/`Measured` where the pattern is backed. No data yet → the
+  panel says so and the hooks stay `Inferred`. The evidence is *why* the hooks
+  are shaped as they are — show it, don't bury it. Refresh the panel whenever
+  a new analyze/study run lands.
 - Hand back: what the evidence says in two or three sentences, the top
   recommended hook(s), and what would upgrade the analysis (usually: Insights
   exports for the top/bottom five reels).
