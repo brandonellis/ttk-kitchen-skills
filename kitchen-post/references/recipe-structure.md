@@ -140,6 +140,14 @@ recipe on LOCAL first (POST to `http://localhost:8000/wp-json/...` or
 with the app password on an explicit instruction. The exact `/manage/recipe`
 payload shape is confirmed against local before it is ever sent to prod.
 
+**PROD POSTS ARE ALWAYS DRAFT.** The blog post that embeds the recipe is
+created on prod with `post_status=draft` — never `publish`. Nothing goes live
+automatically; Alison reviews the draft in WP admin and hits Publish herself.
+When creating via `wp_insert_post`/REST, set the status to `draft` explicitly
+(the recipe CPT can stay as WPRM sets it — the card is only visible through
+the draft post, which is not public until Alison publishes it). Hand the draft
+preview URL back to Brandon. No exceptions: "post it" = "create the draft."
+
 ## What kitchen-post emits
 
 Every recipe draft carries a **structured recipe block** (the array above, as

@@ -142,6 +142,14 @@ the artifact URL; always republish to that same URL, never a sibling.
 - **Never create WordPress content — not even drafts — unless Brandon
   explicitly asks in that session.** A draft created helpfully is a draft he
   has to notice and clean up.
+- **ALWAYS DRAFT STATUS ON PROD — NEVER PUBLISH.** When a prod push IS
+  explicitly requested, the blog post is created with `post_status=draft`,
+  full stop. The skill never publishes a live post; Alison reviews the draft
+  in WP admin and clicks Publish herself. This is a hard safety rule with no
+  exceptions — "post it" means "create the draft," never "go live." Confirm
+  the draft URL back to Brandon after creating it. (The local-mirror test used
+  `publish` only because localhost is a private mirror for previewing; prod is
+  always draft.)
 
 ## WordPress is optional research, never a dependency
 
