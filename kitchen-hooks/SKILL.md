@@ -288,6 +288,14 @@ The Toddler Kitchen brand, never a borrowed look:
   panel says so and the hooks stay `Inferred`. The evidence is *why* the hooks
   are shaped as they are — show it, don't bury it. Refresh the panel whenever
   a new analyze/study run lands.
+- **Research feeds hook creation — apply it, don't just report it (standing
+  decision, Brandon 2026-09-02).** A study/analyze run is not a report that
+  sits beside unchanged hooks; it re-creates and re-ranks them. After findings
+  land: lead with the pattern the data most supports, adopt the winning cover
+  type (e.g. finished food held in a hand), rebuild weak hooks, and drop or
+  demote formats the data shows underperform. The evidence panel then shows
+  hooks that were *built from* the data. The loop is
+  research → new/revised hooks → evidence panel, every time.
 - Hand back: what the evidence says in two or three sentences, the top
   recommended hook(s), and what would upgrade the analysis (usually: Insights
   exports for the top/bottom five reels).
