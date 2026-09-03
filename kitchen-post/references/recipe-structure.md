@@ -106,7 +106,8 @@ skip the recipe block but keep the Feast/Yoast blocks where the site uses them.
 Auth is a WordPress **Application Password** over HTTPS Basic auth. Verified
 2026-09-02. Credentials live outside the repo:
 
-- `~/.config/ttk/wp-user` = `alisonjquinlan` (admin, Ali Ellis)
+- `~/.config/ttk/wp-user` = the WordPress username the app password belongs to
+  (an administrator account); read it with `cat ~/.config/ttk/wp-user`
 - `~/.config/ttk/wp-app-password` (24-char app password, chmod 600)
 - `~/.config/ttk/wp-url` = `https://www.thetoddlerkitchen.com`
 
