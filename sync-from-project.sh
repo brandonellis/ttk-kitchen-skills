@@ -4,7 +4,7 @@
 set -euo pipefail
 SRC="${1:-$HOME/Sites/thetoddlerkitchen/.claude/skills}"
 REPO="$(cd "$(dirname "$0")" && pwd)"
-for s in kitchen kitchen-hooks kitchen-post; do
+for s in kitchen kitchen-hooks kitchen-post kitchen-email; do
   [ -d "$SRC/$s" ] || { echo "missing: $SRC/$s"; exit 1; }
   rsync -a --delete --exclude 'data' "$SRC/$s/" "$REPO/$s/"
 done

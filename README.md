@@ -2,20 +2,22 @@
 
 A suite of [Claude Code](https://claude.com/claude-code) skills for turning a food
 shoot into content for **The Toddler Kitchen** — Instagram reel hooks and a
-matching blog post, produced together on one reviewable page, always in the
+matching blog post, produced together on one reviewable page, plus the weekly
+Sunday email, always in the
 dietitian's own voice and never negative about food.
 
 Built for one business, but the design ideas (a measured voice profile, a
 grep-gated writing floor, provenance grades on every number) transfer to any
 content-generation skill.
 
-## The three skills
+## The four skills
 
 | Skill | Role |
 |---|---|
-| **`kitchen`** | Router. `full` runs the whole pipeline; `guide` walks it with checkpoints; `update` reworks one piece of a creation that already ran; `instagram` / `post` dispatch to the workers. |
+| **`kitchen`** | Router. `full` runs the whole pipeline; `guide` walks it with checkpoints; `update` reworks one piece of a creation that already ran; `instagram` / `post` / `email` dispatch to the workers. |
 | **`kitchen-hooks`** | Instagram reel hooks tailored to real footage, plus account analysis (`analyze`) and inspiration study of other accounts (`study`). |
 | **`kitchen-post`** | A fresh blog post from the shoot, in the site's measured voice, delivered on the same artifact. Net-new by default; pivots to a complementary angle when a post on the recipe already exists. |
+| **`kitchen-email`** | The weekly Sunday email in Kit: 1-3 seasonal recipes from the site, a starter intro for Ali to rewrite, a 3x5 Dinner Prep Method sale box in sale windows and a 3x5 P.S. every week, in the TTK palette. Saves an **unsent Kit draft** only; Ali schedules it. Runs on its own, not as part of `full`. |
 
 The workers stay independently invocable; the router just adds less typing and
 the combined pipeline.
@@ -51,6 +53,12 @@ kitchen-hooks/references/
   ttk-voice.md                          measured site voice profile
   instagram-data.md                     Graph API / Business Discovery / scrape ladder
 kitchen-post/SKILL.md                   blog post from the shoot
+kitchen-email/SKILL.md                  weekly Sunday Kit email (draft only)
+kitchen-email/references/
+  email-template.md                     email shape + measured email voice
+  kit-layout.md                         Kit template, brand palette, block build
+  seasonal-calendar.md                  month-by-month fit + sale windows
+  3x5-method.md                         3x5 product facts and off-limits claims
 ```
 
 **`data/` is intentionally not in this repo.** Each skill writes its working
@@ -60,7 +68,7 @@ so it stays out of version control (see `.gitignore`).
 
 ## Using these in a project
 
-Copy the three skill folders into a project's `.claude/skills/`. The skills
+Copy the four skill folders into a project's `.claude/skills/`. The skills
 reference each other by relative path, so keep them siblings. `kitchen-post`
 and the analysis modes look for a local WordPress mirror when one is available
 and degrade gracefully when it isn't.
@@ -87,6 +95,13 @@ Prod posts are always created as **drafts**; a human publishes.
 user-provided Insights screenshots or a `/browse` read of the public grid.
 Setup and endpoints in `kitchen-hooks/references/instagram-data.md`
 (`~/.config/ttk/ig-token`, `ig-user-id`, `app-id`, `app-secret`).
+
+**Kit connector — required for `kitchen-email` drafts.** The claude.ai Kit
+(ConvertKit) connector, connected via OAuth. The skill uses `list_broadcasts`,
+`get_broadcast`, `get_broadcast_schema` and `create_broadcast`, which only
+ever creates drafts. Without it, the email is delivered as an HTML preview
+and text instead. WordPress credentials are optional for this skill; it falls
+back to the public site pages and search to find recipes.
 
 **gstack `/browse` — optional.** Needed for competitor study, public-grid
 reads, and Google/Pinterest Trends. A separate install; without it those modes

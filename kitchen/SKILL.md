@@ -1,7 +1,7 @@
 ---
 name: kitchen
-description: Router for The Toddler Kitchen content suite. Use when the user types /kitchen, asks for the "full package" for a shoot, wants to be walked through creating content from photos ("guide me", "walk me through"), or points at a folder of photos to turn into content. Dispatches to kitchen-hooks (Instagram reels) and kitchen-post (blog posts), runs both as one pipeline, or guides the user through it checkpoint by checkpoint — one creation-kit artifact either way. The sub-skills remain directly invocable.
-argument-hint: "[full <media> · guide · update <creation> [hooks|post] · instagram <args> · post <args> · analyze · refresh · study <@acct> · trends · help]"
+description: Router for The Toddler Kitchen content suite. Use when the user types /kitchen, asks for the "full package" for a shoot, wants to be walked through creating content from photos ("guide me", "walk me through"), or points at a folder of photos to turn into content. Dispatches to kitchen-hooks (Instagram reels), kitchen-post (blog posts) and kitchen-email (the weekly Sunday Kit email), runs hooks + post as one pipeline, or guides the user through it checkpoint by checkpoint — one creation-kit artifact either way. The sub-skills remain directly invocable.
+argument-hint: "[full <media> · guide · update <creation> [hooks|post] · instagram <args> · post <args> · email <args> · analyze · refresh · study <@acct> · trends · help]"
 disable-model-invocation: false
 ---
 
@@ -18,6 +18,7 @@ artifact. This router just gets you to the right piece with less typing.
 |---|---|---|
 | `instagram` (or `ig`, `hooks`, `reel`) | `kitchen-hooks` | e.g. `/kitchen instagram shoot <path>` → `kitchen-hooks shoot <path>` |
 | `post` (or `blog`) | `kitchen-post` | e.g. `/kitchen post <dish>` → `kitchen-post <dish>` |
+| `email` (or `newsletter`) | `kitchen-email` | e.g. `/kitchen email 2026-11-29 sale "…"` → `kitchen-email 2026-11-29 sale "…"`. Weekly Sunday Kit email; saves an unsent draft only. Not part of `full`. |
 | `full` (or `package`, `kit`, `full package`) | the pipeline below | The whole creation in one run, no checkpoints — decisions made autonomously and reported. |
 | `guide` (or `guided`, `walkthrough`) | the pipeline, guided | Same pipeline with a checkpoint at each human-owned decision. The right default when Brandon or Alison wants to steer. See "Guide mode". |
 | `update <creation> [hooks·post]` (or `revise`, `redo`) | update mode below | Rework ONE piece of a kit that already ran, same artifact URL. Not the WordPress update package — that stays `/kitchen post update <slug>`. |

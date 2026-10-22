@@ -5,6 +5,11 @@ All notable changes to the TTK Kitchen Skills suite.
 ## [Unreleased]
 
 ### Added
+- **`kitchen-email`** — weekly Sunday Kit email: 1-3 seasonal recipes from
+  the site, a starter intro for Ali, a 3x5 Dinner Prep Method sale box in
+  sale windows (Black Friday, New Year, back to school, or on request), a
+  3x5 P.S. every week, built in the TTK palette on her "Monthly Newsletter"
+  Kit template. Saves an unsent draft only. Reachable as `/kitchen email`.
 - **Performance & trends** (`performance-and-trends.md`) — the metric hierarchy
   (shares/saves/follows/watch-time over likes), attribution method, and a
   ranked trend-source list (own account, peers, Google/Pinterest Trends,
