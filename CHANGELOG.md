@@ -4,6 +4,11 @@ All notable changes to the TTK Kitchen Skills suite.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-22
+
+Adds a fourth skill, `kitchen-email`, alongside the performance and recipe
+references built since 0.1.0.
+
 ### Added
 - **`kitchen-email`** — weekly Sunday Kit email: 1-3 seasonal recipes from
   the site, a starter intro for Ali, a 3x5 Dinner Prep Method sale box in
@@ -20,6 +25,12 @@ All notable changes to the TTK Kitchen Skills suite.
   `WPRM_Recipe_Saver::create_recipe`, and API connection via WP-CLI/SSH or
   Application Passwords. `kitchen-post` now emits a structured WPRM recipe
   block so recipe drafts ship as real cards.
+
+### Changed
+- **`kitchen`** router — new `email` (or `newsletter`) route to
+  `kitchen-email`; it runs on its own and is not part of `full`.
+- **`sync-from-project.sh`** — syncs `kitchen-email` too.
+- **README** — four skills, the email skill's files, and Kit connector setup.
 
 ## [0.1.0] - 2026-09-02
 
